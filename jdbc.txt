@@ -1,0 +1,62 @@
+package linkedlist;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+
+	public class sql {
+	    public static void main(String[] args)throws ClassNotFoundException, SQLException {
+	        String URL="jdbc:mysql://localhost:3306/employees";
+	        String Username="root";
+	        String password = "Root@123";
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+	        Connection com;
+			com = DriverManager.getConnection(URL,Username,password);
+			System.out.println("Connection Object Created");
+	        Statement s = null;
+			s = com.createStatement();
+			ResultSet rs=s.executeQuery("select * from employee");
+			
+			System.out.format("%10s%25s%10s%8s%12s%20s",
+            		"EMPLOYEE_ID",
+            "FIRST_NAME",
+            				"LAST_NAME",
+            "SALARY",
+            				"JOINING_DATE",
+            "DEPARTMENT"+"\n");
+			System.out.format("--------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+	          while(rs.next())
+		        {
+		            System.out.format("%10d%25s%10s%8d%12s%20s",
+		            		rs.getInt("EMPLOYEE_ID"),
+		            rs.getString("FIRST_NAME"),
+		            				rs.getString("LAST_NAME"),
+		            rs.getInt("SALARY"),
+		            				rs.getDate("JOINING_DATE"),
+		            rs.getString("DEPARTMENT")+"\n");
+		        }
+
+
+	}
+
+}
+
+////////////////////output
+Connection Object Created
+EMPLOYEE_ID               FIRST_NAME LAST_NAME  SALARYJOINING_DATE         DEPARTMENT
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+         1                Venkatesh         S  100000  2015-08-28            BANKING
+         2                   Ragavi         p   75000  2015-08-28           BUSINESS
+         3                 Gopinath         C   50000  2016-03-02             PHARMA
+         4                   Dinesh         G   50000  2016-03-02          INSURANCE
+         5                  Saibabu         E   40000  2017-07-08           SOFTWARE
+         6                    Hasan         S   29000  2017-07-08      MANUFACTURING
+         7                    Divya         P   33000  2017-07-08         HEALTHCARE
+         8                Aravindan         R   40000  2017-07-08         HEALTHCARE
+         9                  Sathish        MD   45000  2016-03-02         AUTOMOBILE
+        10                 Prasanth       PKP   34000  2016-03-02          INSURANCE
+        11                    Vijay         R   25684  2016-03-02           BUSINESS
+        12                Sivakumar         K   54789  2016-03-02           SOFTWARE
